@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="research.css">
+   <script>
+    // This function runs when the form is submitted
+    function validateForm(event) {
+      const fileInput = document.querySelector('input[type="file"]');
+      const symptomsInput = document.querySelector('textarea');
+
+      if (!fileInput.files.length) {
+        alert("Please select a mammogram image.");
+        event.preventDefault();
+        return false;
+      }
+
+      if (!symptomsInput.value.trim()) {
+        alert("Please enter your symptoms.");
+        event.preventDefault();
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+
+    // Attach form submit handler after DOM is loaded
+    window.onload = () => {
+      const form = document.querySelector("form");
+      form.addEventListener("submit", validateForm);
+    };
+  </script>
+</head>
+<body>
+    <form action="/detect" method="POST" enctype="multipart/form-data">
+    <h1>Breast Cancer Detection</h1>
+    <p> <h3>DETECT</h3></p>
+    <!-- Upload form -->
+        <label>Select Mammogram Image:</label>
+        <input type="file" name="file" accept="image/*" required><br><br>
+         <!-- Symptom Input -->
+        <label>Enter Symptoms </label><br>
+        <textarea name="symptoms" rows="5" cols="50" placeholder="e.g. lump in breast, nipple discharge, swelling..."required></textarea><br><br>
+        
+        <button type="submit">Detect</button>
+        <button type="submit">ok</button>
+    </form>
+    <script src="research.js"></script>
+    
+</body>
+</html>
